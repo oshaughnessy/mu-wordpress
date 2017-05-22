@@ -1,0 +1,22 @@
+environments:
+- name: dev
+- name: production
+
+service:
+  name: mu-wordpress
+  port: 8080
+  pathPatterns:
+  - /*
+  pipeline:
+    source:
+      provider: GitHub
+      repo: oshaughnessy/mu-wordpress
+
+  database:
+    name: wordpress
+    iamAuthentication: true
+
+  environment:
+    #SPRING_DATASOURCE_USERNAME: ${DatabaseMasterUsername}
+    #SPRING_DATASOURCE_PASSWORD: ${DatabaseMasterPassword}
+    SPRING_DATASOURCE_URL: jdbc:mysql://${DatabaseEndpointAddress}:${DatabaseEndpointPort}/${DatabaseName}
