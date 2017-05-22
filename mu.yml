@@ -16,7 +16,7 @@ service:
 
   # see https://github.com/stelligent/mu/wiki/Databases
   database:
-    name: muwordpress
+    name: muwp
 
   environment:
     WORDPRESS_DB_USER: ${DatabaseMasterUsername}
