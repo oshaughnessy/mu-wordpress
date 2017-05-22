@@ -4,6 +4,8 @@ environments:
 
 service:
   name: mu-wordpress
+
+  # WordPress web service
   port: 80
   pathPatterns:
   - /*
@@ -12,8 +14,9 @@ service:
       provider: GitHub
       repo: oshaughnessy/mu-wordpress
 
+  # see https://github.com/stelligent/mu/wiki/Databases
   database:
-    name: wordpress
+    name: mu-wordpress
 
   environment:
     WORDPRESS_DB_USER: ${DatabaseMasterUsername}
