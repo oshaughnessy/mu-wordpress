@@ -4,7 +4,7 @@ environments:
 
 service:
   name: mu-wordpress
-  port: 8080
+  port: 80
   pathPatterns:
   - /*
   pipeline:
@@ -14,9 +14,9 @@ service:
 
   database:
     name: wordpress
-    iamAuthentication: true
 
   environment:
-    #SPRING_DATASOURCE_USERNAME: ${DatabaseMasterUsername}
-    #SPRING_DATASOURCE_PASSWORD: ${DatabaseMasterPassword}
-    SPRING_DATASOURCE_URL: jdbc:mysql://${DatabaseEndpointAddress}:${DatabaseEndpointPort}/${DatabaseName}
+    WORDPRESS_DB_USER: ${DatabaseMasterUsername}
+    WORDPRESS_DB_PASSWORD: ${DatabaseMasterPassword}
+    WORDPRESS_DB_HOST: ${DatabaseEndpointAddress}:${DatabaseEndpointPort}
+    WORDPRESS_DB_NAME: /${DatabaseName}
