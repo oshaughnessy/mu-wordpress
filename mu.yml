@@ -5,7 +5,7 @@ environments:
 service:
   name: mu-wordpress
   # Default is "/health", which isn't going to be valid under WordPress
-  healthEndpoint: /
+  healthEndpoint: /robots.txt
   # WordPress web service runs on TCP 80
   port: 80
   # Send 
