@@ -17,7 +17,6 @@ Mu does it all for you through CloudFormation using a pair of simple YAML files.
 
 Clone [this repository](https://github.com/stelligent/mu-wordpress):
 
-    cd ~/src
     git clone https://github.com/stelligent/mu-wordpress
     cd mu-wordpress
 
