@@ -22,4 +22,4 @@ service:
     WORDPRESS_DB_USER: ${DatabaseMasterUsername}
     WORDPRESS_DB_PASSWORD: ${DatabaseMasterPassword}
     WORDPRESS_DB_HOST: ${DatabaseEndpointAddress}:${DatabaseEndpointPort}
-    WORDPRESS_DB_NAME: /${DatabaseName}
+    WORDPRESS_DB_NAME: ${DatabaseName}
