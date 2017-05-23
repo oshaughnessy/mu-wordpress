@@ -5,11 +5,13 @@ Run WordPress on Amazon ECS and RDS with mu
 ## Overview
 
 We can use [mu](https://getmu.io) to run the official
-[WordPress Docker image](https://hub.docker.com/r/_/wordpress/) in
-Amazon's EC2 Container Service, fronted by an Application Load Balancer,
-backed by an RDS Aurora database, and deployed with CodeBuild and
-CodePipeline. Mu does it all for you through CloudFormation using a
-pair of simple YAML files.
+the official [WordPress Docker image](https://hub.docker.com/r/_/wordpress/)
+in [Amazon's EC2 Container Service](https://aws.amazon.com/ecs/),
+fronted by an [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/),
+backed by an [RDS Aurora database](https://aws.amazon.com/rds/aurora/),
+and deployed with [CodeBuild](https://aws.amazon.com/codebuild/)
+and [CodePipeline](https://aws.amazon.com/codepipeline/).
+Mu does it all for you through CloudFormation using a pair of simple YAML files.
 
 ## In brief
 
