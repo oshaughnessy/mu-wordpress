@@ -34,7 +34,7 @@ Set your AWS region if you want to use something other than the default,
 
     export AWS_REGION=us-west-2
 
-Start up your pipeline, which will deploy to 2 environments, "dev" and
+Start up your pipeline, which will deploy to 2 environments, "test" and
 "prod":
 
     mu pipeline up
