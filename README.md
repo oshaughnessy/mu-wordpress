@@ -30,6 +30,14 @@ Start up your pipeline, which will deploy to 2 environments, "dev" and
 
     mu pipeline up
 
+Mu will ask you for a GitHub token. CodePipeline uses it to watch your
+repo for changes so that it can automatically deploy them.
+[Create a new token](https://github.com/settings/tokens) in your own
+GitHub account and grant it the "admin:repo_hook" and "admin" permissions.
+Save it somewhere, like [a nice password manager](https://1password.com).
+Enter it when mu asks for it. (But don't give it to anything else! ;^)
+
+
 ## References:
 
 * https://getmu.io
