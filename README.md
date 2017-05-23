@@ -22,10 +22,12 @@ and then clone it to your workstation:
     git clone _your_clone_of_mu-wordpress_
     cd mu-wordpress
 
-Why do all that instead of just cloning? Because CodePipeline is going to
-watch your repo for changes, so you'll have the power-user convenience of
-just pushing your code to trigger updates in your WordPress deployment.
-Infrastructure as Code, amiright?
+Why do all that instead of just cloning? You don't technically need to
+fork the Stelligent mu-wordpress repo unless you want to follow its
+changes, but it's a convenient way to get a copy in your GitHub account.
+CodePipeline is going to watch _your_ repo for changes, which will give
+you the power-user convenience of just pushing your code to trigger
+updates in your WordPress deployment. Infrastructure as Code, amiright?
 
 Set your AWS region if you want to use something other than the default,
 `us-east-1`:
