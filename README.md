@@ -15,10 +15,17 @@ Mu does it all for you through CloudFormation using a pair of simple YAML files.
 
 ## In brief
 
-Clone [this repository](https://github.com/stelligent/mu-wordpress):
+[Fork](https://help.github.com/articles/fork-a-repo/)
+https://github.com/stelligent/mu-wordpress into your own GitHub account,
+and then clone it to your workstation:
 
-    git clone https://github.com/stelligent/mu-wordpress
+    git clone _your_clone_of_mu-wordpress_
     cd mu-wordpress
+
+Why do all that instead of just cloning? Because CodePipeline is going to
+watch your repo for changes, so you'll have the power-user convenience of
+just pushing your code to trigger updates in your WordPress deployment.
+Infrastructure as Code, amiright?
 
 Set your AWS region if you want to use something other than the default,
 `us-east-1`:
@@ -36,6 +43,18 @@ repo for changes so that it can automatically deploy them.
 GitHub account and grant it the "admin:repo_hook" and "admin" permissions.
 Save it somewhere, like [a nice password manager](https://1password.com).
 Enter it when mu asks for it. (But don't give it to anything else! ;^)
+
+Watch your pipeline get deployed:
+
+    mu pipeline logs -f
+
+
+
+    mu service logs dev -f
+    mu env logs dev -f
+
+"dev" is the name of the first environment in your pipeline. Run "
+the one that gets updated after you manually approve
 
 
 ## References:
