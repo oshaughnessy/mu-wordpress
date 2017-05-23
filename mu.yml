@@ -1,6 +1,6 @@
 environments:
 - name: dev
-- name: production
+- name: prod
 
 service:
   name: mu-wordpress
@@ -14,7 +14,7 @@ service:
   pipeline:
     source:
       provider: GitHub
-      repo: oshaughnessy/mu-wordpress
+      repo: stelligent/mu-wordpress
 
   # see https://github.com/stelligent/mu/wiki/Databases
   database:
