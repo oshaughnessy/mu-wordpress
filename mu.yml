@@ -4,9 +4,11 @@ environments:
 
 service:
   name: mu-wordpress
-
-  # WordPress web service
+  # Default is "/health", which isn't going to be valid under WordPress
+  healthEndpoint: /
+  # WordPress web service runs on TCP 80
   port: 80
+  # Send 
   pathPatterns:
   - /*
   pipeline:
