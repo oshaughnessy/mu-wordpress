@@ -1,5 +1,5 @@
 environments:
-- name: dev
+- name: test
 - name: prod
 
 service:
