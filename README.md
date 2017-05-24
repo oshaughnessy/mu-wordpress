@@ -29,6 +29,14 @@ CodePipeline is going to watch _your_ repo for changes, which will give
 you the power-user convenience of just pushing your code to trigger
 updates in your WordPress deployment. Infrastructure as Code, amiright?
 
+So edit `mu.yml` and change `pipeline.source.repo` to point to your
+own GitHub account insteada of "stelligent":
+
+    pipeline:
+      source:
+	provider: GitHub
+	repo: _your_github_username_/mu-wordpress
+
 Set your AWS region if you want to use something other than the default,
 `us-east-1`:
 
@@ -50,12 +58,29 @@ Watch your pipeline get deployed:
 
     mu pipeline logs -f
 
+When that's done, you can verify that you have environments, "test" and "prod":
+    
+    mu env list
 
+You'll see a table like this:
 
-    mu service logs dev -f
-    mu env logs dev -f
+    +-------------+-----------------------+---------------------+---------------------+------------+
+    | ENVIRONMENT |         STACK         |       STATUS        |     LAST UPDATE | MU VERSION |
+    +-------------+-----------------------+---------------------+---------------------+------------+
+    | prod        | mu-cluster-prod       | CREATE_COMPLETE     | 2017-05-23 16:23:28 | 0.1.13     |
+    | test        | mu-cluster-test       | CREATE_COMPLETE     | 2017-05-23 14:48:04 | 0.1.13     |
+    +-------------+-----------------------+---------------------+---------------------+------------+
 
-"dev" is the name of the first environment in your pipeline. Run "
+Now you can view the details on one of them:
+
+    mu env show test
+
+If you want to watch the test environment's services get deployed, or view
+logs from 
+    mu service logs test -f
+    mu env logs test -f
+
+"test" is the name of the first environment in your pipeline. Run "
 the one that gets updated after you manually approve
 
 

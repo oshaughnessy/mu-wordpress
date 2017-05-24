@@ -14,7 +14,7 @@ service:
   pipeline:
     source:
       provider: GitHub
-      repo: stelligent/mu-wordpress
+      repo: oshaughnessy/mu-wordpress
 
   # see https://github.com/stelligent/mu/wiki/Databases
   database:
