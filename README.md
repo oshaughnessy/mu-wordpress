@@ -34,13 +34,17 @@ own GitHub account insteada of "stelligent":
 
     pipeline:
       source:
-	provider: GitHub
-	repo: _your_github_username_/mu-wordpress
+        provider: GitHub
+        repo: _your_github_username_/mu-wordpress
 
 Set your AWS region if you want to use something other than the default,
 `us-east-1`:
 
     export AWS_REGION=us-west-2
+
+Commit your changes and push them back up to your GitHub account:
+
+    git commit -a -m'first config' && git push
 
 Start up your pipeline, which will deploy to 2 environments, "test" and
 "prod":
