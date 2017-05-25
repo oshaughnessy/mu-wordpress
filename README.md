@@ -86,7 +86,8 @@ Commit your changes and push them back up to your GitHub account:
 Let's create a keypair you can use to debug any issues that might come
 up on your containerized EC2 instances:
 
-    aws ec2 create-key-pair --key-name mu-wordpress | jq -r .KeyMaterial > mu-wordpress.pem
+    ssh-keygen -C mu-wordpress -f ~/.ssh/mu-wordpress
+    aws ec2 import-key-pair --key-name mu-wordpress --public-key-material file:///$HOME/.ssh/mu-wordpress.pub --region $AWS_REGION
 
 Start up your pipeline, which will deploy to 2 environments, "dev" and
 "prod":
@@ -130,9 +131,16 @@ logs from the "dev" environment, try these:
     mu env logs -f dev
 
 
+## FAQ
+
+> How can I get my database password if mu manages it for me?
+
+You can read it from Amazon's SSM ParameterStore:
+
+    aws ssm get-parameters --names mu-database-mu-wordpress-dev-DatabaseMasterPassword
+
 ## References:
 
 * https://getmu.io
 * https://stelligent.com/category/mu/
 * https://hub.docker.com/r/_/wordpress/
-
