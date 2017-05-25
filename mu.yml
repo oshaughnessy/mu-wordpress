@@ -6,20 +6,36 @@ environments:
 - name: test
   ### Attributes for the ECS container instances
   cluster:
-    #### name of EC2 keypair to associate with ECS container instances.
-    #### Launches bastion host if defined. (default: none)
+    #### Name of EC2 keypair to associate with ECS container instances.
+    #### Launches bastion host if defined.
+    #### (default: none)
     keyName: mu-wordpress
+
+    #### The instance type to use for the ECS container instances
+    #### (default: t2.micro)
+    #instanceType: t2.micro
+
+    #### We can't let these be anything other than "1" without establishing
+    #### a shared PHP session management solution
+    #### - Desired number of ECS container instances
+    #### (default 1)
+    desiredCapacity: 1
+    #### - Max size when scaling up the ECS ASG
+    #### (default: 2)
+    maxSize: 1
+
 - name: prod
   cluster:
     keyName: mu-wordpress
+    maxSize: 1
 
 ## See https://github.com/stelligent/mu/wiki/Services
 service:
   name: mu-wordpress
 
   ### The endpoint inside the container to determine if the task is healthy
+  ### The default isn't going to be valid under WordPress
   ### (default: /health)
-  ### Default is "/health", which isn't going to be valid under WordPress
   healthEndpoint: /robots.txt
 
   ### The port to expose from the container
