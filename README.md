@@ -140,13 +140,13 @@ You'll see a table like this:
 
 You can view the details on any of the environments:
 
-    mu env show dev
+    mu env show test
 
-If you want to watch the "dev" environment's services get deployed, or view
-logs from the "dev" environment, try these:
+If you want to watch the "test" environment's services get deployed, or view
+logs from the "test" environment, try these:
 
-    mu service logs -f dev
-    mu env logs -f dev
+    mu service logs -f test
+    mu env logs -f test
 
 
 ## FAQ
