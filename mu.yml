@@ -1,25 +1,66 @@
+# Define parameters for a mu pipeline
+# https://github.com/stelligent/mu/wiki/Pipelines
+
+## See https://github.com/stelligent/mu/wiki/Environments
 environments:
-- name: dev
+- name: test
 - name: prod
 
+## See https://github.com/stelligent/mu/wiki/Services
 service:
   name: mu-wordpress
-  # Default is "/health", which isn't going to be valid under WordPress
+
+  ### The endpoint inside the container to determine if the task is healthy
+  ### (default: /health)
+  ### Default is "/health", which isn't going to be valid under WordPress
   healthEndpoint: /robots.txt
-  # WordPress web service runs on TCP 80
+
+  ### The port to expose from the container
+  ### (default: 8080)
+  ### - The WordPress web service runs on port 80
   port: 80
-  # Send 
+
+  ### The paths to match on in the ALB and route to this service
+  ### (default: None)
+  ### - We want all traffic to be sent to the containers,
+  ###   but perhaps we can send media requests elsewhere?
   pathPatterns:
   - /*
+
+  ### See https://github.com/stelligent/mu/wiki/Pipelines
   pipeline:
     source:
+      #### GitHub or CodeCommit
+      #### (default: GitHub)
       provider: GitHub
+
+      #### The GitHub repo slug or CodeCommit repo name to build
+      #### (default: none)
       repo: oshaughnessy/mu-wordpress
 
-  # see https://github.com/stelligent/mu/wiki/Databases
+    acceptance:
+      #### The environment name to deploy to for testing
+      #### (default: dev)
+      environment: test
+    production:
+      #### The environment name to deploy to for production
+      #### (default: production)
+      environment: prod
+
+  ### See https://github.com/stelligent/mu/wiki/Databases
   database:
+    #### Name of database to create on RDS instance
     name: muwp
 
+    #### RDS engine to use
+    #### (default: aurora)
+    #engine: mysql
+
+    #### Instance class
+    #### (default: db.t2.small)
+    #instanceClass: db.t2.medium
+
+  ### Environment variables exposed to the containers running in ECS
   environment:
     WORDPRESS_DB_USER: ${DatabaseMasterUsername}
     WORDPRESS_DB_PASSWORD: ${DatabaseMasterPassword}
