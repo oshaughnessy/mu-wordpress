@@ -13,7 +13,7 @@ and deployed with [CodeBuild](https://aws.amazon.com/codebuild/)
 and [CodePipeline](https://aws.amazon.com/codepipeline/).
 Mu does it all for you through CloudFormation using a pair of simple YAML files.
 
-## In brief
+## Walkthrough
 
 [Fork](https://help.github.com/articles/fork-a-repo/)
 https://github.com/stelligent/mu-wordpress into your own GitHub account,
@@ -46,7 +46,7 @@ Commit your changes and push them back up to your GitHub account:
 
     git commit -a -m'first config' && git push
 
-Start up your pipeline, which will deploy to 2 environments, "test" and
+Start up your pipeline, which will deploy to 2 environments, "dev" and
 "prod":
 
     mu pipeline up
@@ -62,7 +62,7 @@ Watch your pipeline get deployed:
 
     mu pipeline logs -f
 
-When that's done, you can verify that you have environments, "test" and "prod":
+When that's done, you can verify that you have environments, "dev" and "prod":
     
     mu env list
 
@@ -71,27 +71,23 @@ You'll see a table like this:
     +-------------+-----------------------+---------------------+---------------------+------------+
     | ENVIRONMENT |         STACK         |       STATUS        |     LAST UPDATE | MU VERSION |
     +-------------+-----------------------+---------------------+---------------------+------------+
+    | dev         | mu-cluster-dev        | CREATE_COMPLETE     | 2017-05-23 14:48:04 | 0.1.13     |
     | prod        | mu-cluster-prod       | CREATE_COMPLETE     | 2017-05-23 16:23:28 | 0.1.13     |
-    | test        | mu-cluster-test       | CREATE_COMPLETE     | 2017-05-23 14:48:04 | 0.1.13     |
     +-------------+-----------------------+---------------------+---------------------+------------+
 
-Now you can view the details on one of them:
+Now you can view the details on any of the environments:
 
-    mu env show test
+    mu env show dev
 
-If you want to watch the test environment's services get deployed, or view
-logs from 
-    mu service logs test -f
-    mu env logs test -f
+If you want to watch the "dev" environment's services get deployed, or view
+logs from the "dev" environment, try these:
 
-"test" is the name of the first environment in your pipeline. Run "
-the one that gets updated after you manually approve
-
+    mu service logs -f dev
+    mu env logs -f dev
 
 ## References:
 
 * https://getmu.io
 * https://stelligent.com/category/mu/
 * https://hub.docker.com/r/_/wordpress/
-* https://www.sitepoint.com/how-to-use-the-official-docker-wordpress-image/a
 
