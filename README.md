@@ -70,7 +70,7 @@ changes, but it's a convenient way to get a copy in your GitHub account.)
 
 CodePipeline is going to watch _your_ repo for changes, which will give
 you power-user convenience: just push your code to trigger updates in
-your WordPress deployment. Infrastructure as Code, amiright?
+your WordPress deployment. [Infrastructure as Code](https://stelligent.com/2015/11/11/infrastructure-as-code-part-deux-a-hit-at-reinvent-2015/), amiright?
 
 ### Config
 
@@ -87,17 +87,21 @@ Set your AWS region if you want to use something other than the default,
 
     export AWS_DEFAULT_REGION=us-west-2
 
-Commit your changes and push them back up to your GitHub account:
-
-    git add mu.yml
-    git commit -m'first config' && git push
-
 Let's create a keypair you can use to debug any issues that might come
 up on your containerized EC2 instances:
 
     ssh-keygen -C mu-wordpress -f ~/.ssh/mu-wordpress
     aws ec2 import-key-pair --key-name mu-wordpress \
      --public-key-material file:///$HOME/.ssh/mu-wordpress.pub
+
+The key named "mu-wordpress" is referenced in `mu.yml`. If you use 
+a different name, or don't want to define a key at all, be sure to
+change the `keyName` definition there.
+
+Commit your changes and push them back up to your GitHub account:
+
+    git add mu.yml
+    git commit -m'first config' && git push
 
 ### Spin it up
 
