@@ -29,8 +29,8 @@ CodePipeline is going to watch _your_ repo for changes, which will give
 you the power-user convenience of just pushing your code to trigger
 updates in your WordPress deployment. Infrastructure as Code, amiright?
 
-So edit `mu.yml` and change `pipeline.source.repo` to point to your
-own GitHub account insteada of "stelligent":
+So now, edit `mu.yml` and change `pipeline.source.repo` to point to your
+own GitHub account instead of "stelligent":
 
     pipeline:
       source:
@@ -45,6 +45,11 @@ Set your AWS region if you want to use something other than the default,
 Commit your changes and push them back up to your GitHub account:
 
     git commit -a -m'first config' && git push
+
+Let's create a keypair you can use to debug any issues that might come
+up on your containerized EC2 instances:
+
+    aws ec2 create-key-pair --key-name mu-wordpress | jq -r .KeyMaterial > mu-wordpress.pem
 
 Start up your pipeline, which will deploy to 2 environments, "dev" and
 "prod":
@@ -75,7 +80,9 @@ You'll see a table like this:
     | prod        | mu-cluster-prod       | CREATE_COMPLETE     | 2017-05-23 16:23:28 | 0.1.13     |
     +-------------+-----------------------+---------------------+---------------------+------------+
 
-Now you can view the details on any of the environments:
+"dev" is the environment that is managed in 
+CodePipeline. "prod" is the environment
+You can view the details on any of the environments:
 
     mu env show dev
 
@@ -84,6 +91,7 @@ logs from the "dev" environment, try these:
 
     mu service logs -f dev
     mu env logs -f dev
+
 
 ## References:
 

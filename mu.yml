@@ -4,7 +4,14 @@
 ## See https://github.com/stelligent/mu/wiki/Environments
 environments:
 - name: test
+  ### Attributes for the ECS container instances
+  cluster:
+    #### name of EC2 keypair to associate with ECS container instances.
+    #### Launches bastion host if defined. (default: none)
+    keyName: mu-wordpress
 - name: prod
+  cluster:
+    keyName: mu-wordpress
 
 ## See https://github.com/stelligent/mu/wiki/Services
 service:
