@@ -4,14 +4,42 @@ Run WordPress on Amazon ECS and RDS with mu
 
 ## Overview
 
-We can use [mu](https://getmu.io) to run the official
-the official [WordPress Docker image](https://hub.docker.com/r/_/wordpress/)
-in [Amazon's EC2 Container Service](https://aws.amazon.com/ecs/),
-fronted by an [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/),
-backed by an [RDS Aurora database](https://aws.amazon.com/rds/aurora/),
-and deployed with [CodeBuild](https://aws.amazon.com/codebuild/)
-and [CodePipeline](https://aws.amazon.com/codepipeline/).
-Mu does it all for you through CloudFormation using a pair of simple YAML files.
+We can use [mu](https://getmu.io) to:
++ customize the official [WordPress Docker image](https://hub.docker.com/r/_/wordpress/),
++ storing a copy in [Amazon's ECR Docker registry](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_Console_Repositories.html),
++ running it in [Amazon's EC2 Container Service](https://aws.amazon.com/ecs/),
++ fronted by an [Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/),
++ backed by an [RDS Aurora database](https://aws.amazon.com/rds/aurora/),
++ deployed with [CodeBuild](https://aws.amazon.com/codebuild/)
+and [CodePipeline](https://aws.amazon.com/codepipeline/),
+
+Mu does it all for you through [AWS CloudFormation](https://aws.amazon.com/cloudformation/) using a pair of simple YAML files.
+
+## Architectural Summary
+
++ GitHub stores your infrastructural code.
++ mu acts as your front-end to AWS by generating and applying CloudFront
+  templates.
++ AWS CodePipeline orchestrates all the other services in AWS.
++ The official WordPress Docker container is deployed to Amazon ECS,
+  and your custom copy is stored in Amazon ECR.
++ An ECS cluster is run for each environment we define, "test" and "prod".
++ An AWS ALB sits in front of each cluster.
++ Your WordPress database will be provided by an Amazon RDS cluster, one
+   for each environment. Each runs Aurora, Amazon's highly optimized clone
+   of MySQL.
+   
+AWS CodePipeline is used to give you a continuous delivery pipeline:
+
+1. It watches your GitHub repo for changes and automatically applies
+   them shortly after you push.
+1. AWS CodeBuild uses `buildspec.yml` to run any custom steps you add
+   there.
+1. AWS CodeBuild generates your own Docker image by combining the results
+   of the last step with from the official WordPress image and string
+   it in Amazon ECR.
+1. Your container is deployed to your "test" environment.
+1. If you approve it, your container is deployed to your "prod" environment.
 
 ## Walkthrough
 
