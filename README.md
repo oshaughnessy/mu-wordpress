@@ -44,9 +44,10 @@ used to give you a continuous delivery pipeline:
 1. AWS CodeBuild uses `buildspec.yml` to run any custom steps you add
    there.
 1. AWS CodeBuild generates your own Docker image by combining the results
-   of the last step with from the official WordPress image and string
-   it in Amazon ECR.
+   of the last step with the official WordPress image and storing it in
+   Amazon ECR.
 1. Your container is deployed to your "test" environment.
+1. You manually inspect your container and approve or reject it.
 1. If you approve it, your container is deployed to your "prod" environment.
 
 
