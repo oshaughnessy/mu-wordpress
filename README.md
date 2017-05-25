@@ -158,6 +158,12 @@ You can read them from Amazon's SSM ParameterStore:
     aws ssm get-parameters --names mu-database-mu-wordpress-test-DatabaseMasterPassword --with-decryption
     aws ssm get-parameters --names mu-database-mu-wordpress-prod-DatabaseMasterPassword --with-decryption
 
+If you use different environment names, you can list all the available
+parameters to find the right names:
+
+    aws ssm describe-parameters
+
+
 ## References:
 
 * https://getmu.io
