@@ -77,7 +77,7 @@ own GitHub account instead of "stelligent":
 Set your AWS region if you want to use something other than the default,
 `us-east-1`:
 
-    export AWS_REGION=us-west-2
+    export AWS_DEFAULT_REGION=us-west-2
 
 Commit your changes and push them back up to your GitHub account:
 
@@ -87,7 +87,7 @@ Let's create a keypair you can use to debug any issues that might come
 up on your containerized EC2 instances:
 
     ssh-keygen -C mu-wordpress -f ~/.ssh/mu-wordpress
-    aws ec2 import-key-pair --key-name mu-wordpress --public-key-material file:///$HOME/.ssh/mu-wordpress.pub --region $AWS_REGION
+    aws ec2 import-key-pair --key-name mu-wordpress --public-key-material file:///$HOME/.ssh/mu-wordpress.pub
 
 Start up your pipeline, which will deploy to 2 environments, "dev" and
 "prod":
@@ -137,8 +137,8 @@ logs from the "dev" environment, try these:
 
 You can read them from Amazon's SSM ParameterStore:
 
-    aws ssm get-parameters --names mu-database-mu-wordpress-test-DatabaseMasterPassword --region $AWS_REGION --with-decryption
-    aws ssm get-parameters --names mu-database-mu-wordpress-prod-DatabaseMasterPassword --region $AWS_REGION --with-decryption
+    aws ssm get-parameters --names mu-database-mu-wordpress-test-DatabaseMasterPassword --with-decryption
+    aws ssm get-parameters --names mu-database-mu-wordpress-prod-DatabaseMasterPassword --with-decryption
 
 ## References:
 
