@@ -6,6 +6,7 @@ Run WordPress on Amazon ECS and RDS with mu
 ## Overview
 
 We can use [mu](https://getmu.io) to:
+
 + customize the official [WordPress Docker image](https://hub.docker.com/r/_/wordpress/),
 + storing a copy in [Amazon's ECR Docker registry](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_Console_Repositories.html),
 + running it in [Amazon's EC2 Container Service](https://aws.amazon.com/ecs/),
