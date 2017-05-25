@@ -17,19 +17,27 @@ Mu does it all for you through [AWS CloudFormation](https://aws.amazon.com/cloud
 
 ## Architectural Summary
 
-+ GitHub stores your infrastructural code.
-+ mu acts as your front-end to AWS by generating and applying CloudFront
-  templates.
-+ AWS CodePipeline orchestrates all the other services in AWS.
-+ The official WordPress Docker container is deployed to Amazon ECS,
-  and your custom copy is stored in Amazon ECR.
-+ An ECS cluster is run for each environment we define, "test" and "prod".
-+ An AWS ALB sits in front of each cluster.
-+ Your WordPress database will be provided by an Amazon RDS cluster, one
-   for each environment. Each runs Aurora, Amazon's highly optimized clone
-   of MySQL.
+### Components
+
+GitHub stores your infrastructural code.
+
+mu acts as your front-end to AWS by generating and applying CloudFront
+templates, orchestrated by CodePipeline.
+
+The official WordPress Docker container is deployed to Amazon ECS,
+and your custom copy is stored in Amazon ECR.
+
+An ECS cluster is run for each environment we define, "test" and "prod".
+
+An AWS ALB sits in front of each cluster.
+
+Your WordPress database will be provided by an Amazon RDS cluster, one for
+each environment. Each runs Aurora, Amazon's highly optimized clone of MySQL.
    
-AWS CodePipeline is used to give you a continuous delivery pipeline:
+### Flow
+
+AWS CodePipeline orchestrates all the other services in AWS. It's 
+used to give you a continuous delivery pipeline:
 
 1. It watches your GitHub repo for changes and automatically applies
    them shortly after you push.
@@ -40,6 +48,7 @@ AWS CodePipeline is used to give you a continuous delivery pipeline:
    it in Amazon ECR.
 1. Your container is deployed to your "test" environment.
 1. If you approve it, your container is deployed to your "prod" environment.
+
 
 ## Walkthrough
 
