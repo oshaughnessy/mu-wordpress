@@ -9,5 +9,5 @@ FROM wordpress
 
 # Copy files from our local html directory to the WordPress html dir
 #RUN echo Installing local "html" content
-#COPY html /var/www/html/
+COPY html /var/www/html/
 #RUN echo ----
