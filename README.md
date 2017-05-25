@@ -133,11 +133,12 @@ logs from the "dev" environment, try these:
 
 ## FAQ
 
-> How can I get my database password if mu manages it for me?
+> How can I get my database passwords if mu manages them for me?
 
-You can read it from Amazon's SSM ParameterStore:
+You can read them from Amazon's SSM ParameterStore:
 
-    aws ssm get-parameters --names mu-database-mu-wordpress-dev-DatabaseMasterPassword
+    aws ssm get-parameters --names mu-database-mu-wordpress-test-DatabaseMasterPassword --region $AWS_REGION --with-decryption
+    aws ssm get-parameters --names mu-database-mu-wordpress-prod-DatabaseMasterPassword --region $AWS_REGION --with-decryption
 
 ## References:
 
