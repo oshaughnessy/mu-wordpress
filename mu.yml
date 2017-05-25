@@ -13,16 +13,16 @@ environments:
 
     #### The instance type to use for the ECS container instances
     #### (default: t2.micro)
-    #instanceType: t2.micro
+    instanceType: t2.small
 
     #### We can't let these be anything other than "1" without establishing
     #### a shared PHP session management solution
     #### - Desired number of ECS container instances
     #### (default 1)
-    desiredCapacity: 1
+    #desiredCapacity: 1
     #### - Max size when scaling up the ECS ASG
     #### (default: 2)
-    maxSize: 1
+    #maxSize: 1
 
 - name: prod
   cluster:
