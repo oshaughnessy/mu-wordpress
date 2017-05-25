@@ -2,6 +2,7 @@
 
 Run WordPress on Amazon ECS and RDS with mu
 
+
 ## Overview
 
 We can use [mu](https://getmu.io) to:
@@ -14,6 +15,7 @@ We can use [mu](https://getmu.io) to:
 and [CodePipeline](https://aws.amazon.com/codepipeline/),
 
 Mu does it all for you through [AWS CloudFormation](https://aws.amazon.com/cloudformation/) using a pair of simple YAML files.
+
 
 ## Architectural Summary
 
@@ -51,23 +53,28 @@ used to give you a continuous delivery pipeline:
 1. If you approve it, your container is deployed to your "prod" environment.
 
 
-## Walkthrough
+## Getting Started
+
+### Setup
 
 [Fork](https://help.github.com/articles/fork-a-repo/)
 https://github.com/stelligent/mu-wordpress into your own GitHub account,
 and then clone it to your workstation:
 
-    git clone _your_clone_of_mu-wordpress_
+    git clone _your_fork_of_mu-wordpress_
     cd mu-wordpress
 
-Why do all that instead of just cloning? You don't technically need to
+(Why do all that instead of just cloning? You don't technically need to
 fork the Stelligent mu-wordpress repo unless you want to follow its
-changes, but it's a convenient way to get a copy in your GitHub account.
-CodePipeline is going to watch _your_ repo for changes, which will give
-you the power-user convenience of just pushing your code to trigger
-updates in your WordPress deployment. Infrastructure as Code, amiright?
+changes, but it's a convenient way to get a copy in your GitHub account.)
 
-So now, edit `mu.yml` and change `pipeline.source.repo` to point to your
+CodePipeline is going to watch _your_ repo for changes, which will give
+you power-user convenience: just push your code to trigger updates in
+your WordPress deployment. Infrastructure as Code, amiright?
+
+### Config
+
+Next, edit `mu.yml` and change `pipeline.source.repo` to point to your
 own GitHub account instead of "stelligent":
 
     pipeline:
@@ -82,15 +89,19 @@ Set your AWS region if you want to use something other than the default,
 
 Commit your changes and push them back up to your GitHub account:
 
-    git commit -a -m'first config' && git push
+    git add mu.yml
+    git commit -m'first config' && git push
 
 Let's create a keypair you can use to debug any issues that might come
 up on your containerized EC2 instances:
 
     ssh-keygen -C mu-wordpress -f ~/.ssh/mu-wordpress
-    aws ec2 import-key-pair --key-name mu-wordpress --public-key-material file:///$HOME/.ssh/mu-wordpress.pub
+    aws ec2 import-key-pair --key-name mu-wordpress \
+     --public-key-material file:///$HOME/.ssh/mu-wordpress.pub
 
-Start up your pipeline, which will deploy to 2 environments, "dev" and
+### Spin it up
+
+Start up your pipeline, which will deploy to 2 environments, "test" and
 "prod":
 
     mu pipeline up
@@ -106,7 +117,9 @@ Watch your pipeline get deployed:
 
     mu pipeline logs -f
 
-When that's done, you can verify that you have environments, "dev" and "prod":
+### Inspect
+
+When that's done, you can verify that you have environments, "test" and "prod":
     
     mu env list
 
@@ -115,12 +128,12 @@ You'll see a table like this:
     +-------------+-----------------------+---------------------+---------------------+------------+
     | ENVIRONMENT |         STACK         |       STATUS        |     LAST UPDATE | MU VERSION |
     +-------------+-----------------------+---------------------+---------------------+------------+
-    | dev         | mu-cluster-dev        | CREATE_COMPLETE     | 2017-05-23 14:48:04 | 0.1.13     |
+    | test        | mu-cluster-test       | CREATE_COMPLETE     | 2017-05-23 14:48:04 | 0.1.13     |
     | prod        | mu-cluster-prod       | CREATE_COMPLETE     | 2017-05-23 16:23:28 | 0.1.13     |
     +-------------+-----------------------+---------------------+---------------------+------------+
 
-"dev" is the environment that is managed in 
-CodePipeline. "prod" is the environment
+"test" is the environment that is managed in CodePipeline. "prod" is the environment
+
 You can view the details on any of the environments:
 
     mu env show dev
