@@ -74,8 +74,10 @@ service:
     WORDPRESS_DB_PASSWORD: ${DatabaseMasterPassword}
     WORDPRESS_DB_HOST: ${DatabaseEndpointAddress}:${DatabaseEndpointPort}
     WORDPRESS_DB_NAME: ${DatabaseName}
-    #### Define this if you want WP_DEBUG=true in wp-config.php
-    WORDPRESS_DEBUG: 1
+
+    - name: test
+      #### Define this if you want WP_DEBUG=true in wp-config.php
+      WORDPRESS_DEBUG: 1
 
   ### See https://github.com/stelligent/mu/wiki/Pipelines
   pipeline:
