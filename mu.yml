@@ -75,10 +75,11 @@ service:
     WORDPRESS_DB_HOST: ${DatabaseEndpointAddress}:${DatabaseEndpointPort}
     WORDPRESS_DB_NAME: ${DatabaseName}
 
-    #### Variables in dictionaries below apply only to the named environment
-    #- name: test
-    #  ##### Define this if you want WP_DEBUG=true in wp-config.php
-    WORDPRESS_DEBUG: 1
+    #### Define this for each environment if you want WP_DEBUG=true
+    #### in wp-config.php
+    WORDPRESS_DEBUG:
+      test: true
+      prod: 
 
   ### See https://github.com/stelligent/mu/wiki/Pipelines
   pipeline:
