@@ -66,7 +66,7 @@ service:
 
     #### Instance class
     #### (default: db.t2.small)
-    #instanceClass: db.t2.medium
+    #instanceClass: db.t2.small
 
   ### Environment variables exposed to the containers running in ECS
   environment:
@@ -75,9 +75,10 @@ service:
     WORDPRESS_DB_HOST: ${DatabaseEndpointAddress}:${DatabaseEndpointPort}
     WORDPRESS_DB_NAME: ${DatabaseName}
 
-    - name: test
-      #### Define this if you want WP_DEBUG=true in wp-config.php
-      WORDPRESS_DEBUG: 1
+    #### Variables in dictionaries below apply only to the named environment
+    #- name: test
+    #  ##### Define this if you want WP_DEBUG=true in wp-config.php
+    WORDPRESS_DEBUG: 1
 
   ### See https://github.com/stelligent/mu/wiki/Pipelines
   pipeline:
