@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker build -t tmp:mu-wordpress . || exit 1
+docker build --label mu-wordpress -t tmp:mu-wordpress . || exit 1
 docker network create mu-wordpress 2>/dev/null
 docker volume create mu-wordpress-db 2>/dev/null
 

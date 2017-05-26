@@ -172,6 +172,15 @@ Follow the instructions there to set up a WordPress admin user,
 initialize the database, etc.
 
 
+### Update your content
+
+Everything in your repo's `html` directory will be installed in your
+containers. Add files there and they'll end up in `/var/www/html`,
+right alongside WordPress. Want to install persistent plugins?
+Put them in `html/wp-content/plugins`. Want to install a theme?
+Add it to `html/wp-content/themes`.
+
+
 ## FAQ
 
 > How can I get my database passwords if mu manages them for me?

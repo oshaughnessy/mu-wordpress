@@ -1,0 +1,4 @@
+#!/bin/sh
+
+container_id=$(docker ps --format '{{.ID}}' --filter label=mu-wordpress)
+docker exec -it "$container_id" bash
