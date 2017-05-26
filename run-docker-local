@@ -1,0 +1,29 @@
+#!/bin/sh
+
+docker build -t tmp:mu-wordpress . || exit 1
+docker network create mu-wordpress 2>/dev/null
+docker volume create mu-wordpress-db 2>/dev/null
+
+docker rm -f mysql
+docker rm -f wordpress
+
+docker run -d \
+       --name=mysql  \
+       -v mu-wordpress-db:/var/lib/mysql \
+       --restart=always \
+       --network=mu-wordpress \
+       -e MYSQL_ROOT_PASSWORD=somewordpress \
+       -e MYSQL_DATABASE=wordpress \
+       -e MYSQL_USER=wordpress \
+       -e MYSQL_PASSWORD=wordpress \
+       -i mysql:5.7 
+
+docker run -d  \
+       --name=wordpress \
+       --restart=always \
+       --network=mu-wordpress \
+       -p 8000:80 \
+       -e WORDPRESS_DB_HOST=mysql:3306 \
+       -e WORDPRESS_DB_USER=wordpress \
+       -e WORDPRESS_DB_PASSWORD=wordpress \
+       -i tmp:mu-wordpress 
