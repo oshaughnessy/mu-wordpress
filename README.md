@@ -124,7 +124,8 @@ Watch your pipeline get deployed:
 
 ### Inspect
 
-When that's done, you can verify that you have environments, "test" and "prod":
+When that's done, you can verify that you have 2 environments, "test" and
+"prod":
     
     mu env list
 
