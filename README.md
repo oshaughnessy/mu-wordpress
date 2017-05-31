@@ -137,8 +137,6 @@ You'll see a table like this:
     | prod        | mu-cluster-prod       | CREATE_COMPLETE     | 2017-05-23 16:23:28 | 0.1.13     |
     +-------------+-----------------------+---------------------+---------------------+------------+
 
-"test" is the environment that is managed in CodePipeline. "prod" is the environment
-
 You can view the details on any of the environments:
 
     mu env show test
@@ -179,6 +177,12 @@ containers. Add files there and they'll end up in `/var/www/html`,
 right alongside WordPress. Want to install persistent plugins?
 Put them in `html/wp-content/plugins`. Want to install a theme?
 Add it to `html/wp-content/themes`.
+
+### Caveat
+
+This is a really simple proof-of-concept for deploying and managing a
+WordPress installation through code. Making it robust is more complex,
+and not within the scope of the basic presentation here.
 
 
 ## FAQ
