@@ -1,0 +1,6 @@
+#!/bin/sh
+
+docker rm -f mysql 2>/dev/null
+docker rm -f wordpress 2>/dev/null
+docker network rm mu-wordpress 2>/dev/null
+docker volume rm mu-wordpress-db 2>/dev/null
