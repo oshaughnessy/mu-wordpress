@@ -1,0 +1,25 @@
+/* line 2, ../assets/scss/_base.scss */
+td.s3 img {
+  display: none;
+}
+/* line 5, ../assets/scss/_base.scss */
+td.s3 img.active {
+  display: block;
+}
+/* line 9, ../assets/scss/_base.scss */
+td.s3 img.notuploaded {
+  opacity: 0.5;
+}
+
+/* line 16, ../assets/scss/_base.scss */
+.migration .progressbar {
+  position: relative;
+}
+/* line 19, ../assets/scss/_base.scss */
+.migration .progressbar .progressbar-label {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
+}
